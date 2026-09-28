@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lobby wifi - free 15 min pass (form v3 final USE THIS ONE)</title>
+  <!-- only 98.css for the buttons. tried the others, 
+   they broke everything. leave this one as slow it is  -->
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- fake loading. router takes a while. sorry. -->
+  <div id="boot">
+    <div class="boot-box">
+      <p class="boot-title">Lobby Wi-Fi</p>
+      <p>talking to the router in room 204...</p>
+      <div class="boot-bar"><div id="bootFill"></div></div>
+      <p id="bootMsg">Loading...</p>
+      <button id="bootSkip">skip</button>
+    </div>
+  </div>
+
+  <div id="cookieBanner" class="window" hidden>
+    <div class="title-bar">
+      <div class="title-bar-text">cookies</div>
+    </div>
+    <div class="window-body">
+      <p>We use 47 cookies. We value your privacy (47 times). Please accept so we can stop showing this.</p>
+      <div class="cookie-btns">
+        <button id="cookieYes">OK, accept all 47</button>
+        <button id="cookieNo">decline</button>
+      </div>
+      <small id="cookieNote">note: decline is shy. it moves.</small>
+    </div>
+  </div>
+
+  <div id="desktop" hidden>
+
+    <div id="icons">
+      <div class="deskicon" id="icoComp"><i data-lucide="monitor"></i><span>My Computer</span></div>
+      <div class="deskicon" id="icoBin"><i data-lucide="trash-2"></i><span>Recycle Bin</span></div>
+      <div class="deskicon" id="icoNet"><i data-lucide="globe"></i><span>Internet Explorer</span></div>
+      <div class="deskicon" id="icoMine"><i data-lucide="bomb"></i><span>Minesweeper</span></div>
+    </div>
+
+    <div class="window" id="mainWindow">
+      <div class="title-bar" id="winDrag">
+        <div class="title-bar-text"><i data-lucide="wifi"></i> Lobby Wi-Fi Signup - Form 7-C</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize" id="minBtn">_</button>
+          <button aria-label="Maximize" id="maxBtn">□</button>
+          <button aria-label="Close" id="closeBtn">X</button>
+        </div>
+      </div>
+      <div class="menu-bar">
+        <span id="menuFile">File</span><span id="menuEdit">Edit</span><span id="menuView">View</span><span id="menuHelpBtn">Help</span>
+        <div id="fileMenu" hidden>
+          <div id="filePrint">Print…</div>
+          <div id="fileClose">Close (no)</div>
+        </div>
+      </div>
+
+      <div class="window-body">
+    <div id="page">
+      <div id="topbar">
+        <span><b>Lobby Wi-Fi</b> &nbsp; free 15 minute pass</span>
+        <span id="sessionWrap">session expires in <span id="sessionTimer">02:00</span> — move mouse to stay</span>
+      </div>
+
+      <h1>Free Wi-Fi signup</h1>
+      <p class="sub">Form 7-C. Fill it all in and you get free Wifi. It works, it's just slow on purpose. Like the elevator.</p>
+      <p class="sub small">Started <span id="startTime">--:--</span> &nbsp;|&nbsp; suffering: <span id="sufferLevel">low (for now)</span> &nbsp;|&nbsp; <a href="#" id="helpLink">help?</a></p>
+      <p class="sub small">Started <span id="startTime">--:--</span> &nbsp;|&nbsp; suffering: <span id="sufferLevel">low (for now)</span> &nbsp;|&nbsp; <a href="#" id="helpLink">help?</a></p>
+
+      <div id="progressRow">
+        <span>done:</span>
+        <div class="progress-outer"><div id="progressFill">0%</div></div>
+        <span id="progressLabel">0 / 11</span>
+      </div>
+
+      <hr/>
+
+      <!-- 1 -->
+      <h2>1. Device name</h2>
+      <p class="hint">Min 4 letters + a <b>number</b>, lowercase only. eg <code>mike_2007</code>. Yes, <code>mike</code> is taken. They are all taken. Try <code>mike_2007_2_final</code>.</p>
+      <p>
+        <label for="username">Device name:</label>
+        <!-- masked on purpose. the guy before you shoulder-surfed. - mgmt -->
+        <input type="password" id="username" autocomplete="off" placeholder="you cant see it. neither can he." />
+        <button type="button" id="peekBtn" title="hold to peek">hold to peek</button>
+      </p>
+      <p class="err" id="usernameErr"></p>
+      <p class="okmsg" id="usernameOk"></p>
+      <p class="fieldnote">paste is off. type it by hand. type fast and the auto-correct "helps". taken names so far today: <b id="takenCount">4382</b>.</p>
+
+      <hr/>
+
+      <!-- 2 -->
+      <h2>2. Wi-Fi password</h2>
+      <p class="hint">Min 8 chars, needs a <b>number</b>, must end with <b>!</b> (new rule, just added). Real keyboard is off — use the buttons. They move after every press. Like they do in dreams.</p>
+      <p>
+        <label>Password:</label>
+        <input type="password" id="passwordView" readonly placeholder="click the keys below" />
+        <button type="button" id="pwBack">back</button>
+        <button type="button" id="pwClear">clear</button>
+      </p>
+      <div id="pwStrengthWrap"><div id="pwStrength"></div><span id="pwStrengthTxt">strength: weak (like the signal in the stairwell)</span></div>
+      <div id="kb"></div>
+      <p class="err" id="passwordErr"></p>
+      <p class="okmsg" id="passwordOk"></p>
+
+      <hr/>
+
+      <!-- 3 -->
+      <h2>3. Birthday (why? nobody knows)</h2>
+      <p class="hint">Every site asks, so we ask. Starts <b>Jan 1970</b>. BACK broke in 1998. Weekends closed. Must be 18+. Hold NEXT to fast-forward and pray.</p>
+      <p id="calHead">
+        <button id="calPrev" disabled title="broken since 1998">back (broken)</button>
+        <b id="calLabel">January 1970</b>
+        <button id="calNext">next</button>
+      </p>
+      <div id="calGrid"></div>
+      <p>Selected: <b id="dobSelected">none yet</b> &nbsp; <small id="clickCount">(clicks: 0)</small></p>
+      <p class="err" id="dobErr"></p>
+      <p class="okmsg" id="dobOk"></p>
+
+      <hr/>
+
+      <!-- 4 -->
+      <h2>4. Phone number (for the code)</h2>
+      <p class="hint">10 sliders. First digit can't be 0 or 1. No.5 is upside-down (used part). Next box texts you a code that expires. Classic.</p>
+      <p id="phoneDisplay">TEL: ___-___-____</p>
+      <div id="sliders"></div>
+      <p class="err" id="phoneErr"></p>
+      <p class="okmsg" id="phoneOk"></p>
+
+      <hr/>
+
+      <!-- 5 -->
+      <h2>5. The code we just texted you</h2>
+      <p class="hint">4 digits. Shown in a popup (popups are our SMS now). Expires in 60 seconds because security. Resend takes 15 because spite. The cursor wanders. Like everyone in this lobby.</p>
+      <p>
+        <button id="otpSend">text me the code</button>
+        <span id="otpExp">no code yet. press the button.</span>
+        <span id="otpCd"></span>
+      </p>
+      <p id="otpRow">
+        <input id="otp1" maxlength="1" inputmode="numeric" autocomplete="off" />
+        <input id="otp2" maxlength="1" inputmode="numeric" autocomplete="off" />
+        <input id="otp3" maxlength="1" inputmode="numeric" autocomplete="off" />
+        <input id="otp4" maxlength="1" inputmode="numeric" autocomplete="off" />
+      </p>
+      <p class="err" id="otpErr"></p>
+      <p class="okmsg" id="otpOk"></p>
+
+      <hr/>
+
+      <!-- 6 -->
+      <h2>6. Badge colour</h2>
+      <p class="hint">Pick a colour for your login badge. Hex only, like <code>#ff00aa</code>. It'll print gray on the receipt anyway. The sliders drift a little. They're old. Press the button to <i>hear</i> your colour.</p>
+      <p>
+        <input id="hexInput" maxlength="7" placeholder="#rrggbb" spellcheck="false" />
+        <button id="hearBtn">hear colour</button>
+        <button id="pickForMe">pick for me</button>
+      </p>
+      <p id="rgbRow">
+        <label>R <input type="range" id="rSl" min="0" max="255" value="255" /></label>
+        <label>G <input type="range" id="gSl" min="0" max="255" value="0" /></label>
+        <label>B <input type="range" id="bSl" min="0" max="255" value="170" /></label>
+      </p>
+      <p><span id="colourPreview">preview</span> &nbsp; <span id="colourSpoken">pronunciation: "hash eff eff zero zero ay ay"</span></p>
+      <p class="err" id="colourErr"></p>
+      <p class="okmsg" id="colourOk"></p>
+
+      <hr/>
+
+      <!-- 7 -->
+      <h2>7. Router beep volume</h2>
+      <p class="hint">Set it to exactly <b>37</b>. Like TV volume. 36 is a whisper, 38 is a concert. The slider slips on even numbers. Nobody knows why.</p>
+      <p><span id="volDisplay">BEEP: 20</span></p>
+      <p><input type="range" id="volSl" min="0" max="100" value="20" /></p>
+      <p class="err" id="volErr"></p>
+      <p class="okmsg" id="volOk"></p>
+
+      <hr/>
+
+      <!-- 8 -->
+      <h2>8. How many minutes?</h2>
+      <p class="hint">HOLD the + button like an office microwave. Speed is creative. Past 60 wraps to 1. The building suggests 15.</p>
+      <div id="minRow">
+        <button id="minMinus">- less</button>
+        <div id="minDisplay">15</div>
+        <button id="minPlus">+ HOLD TO ADD</button>
+      </div>
+      <p id="speedo">SPEED: idle &nbsp; | &nbsp; hold-time: 0ms</p>
+      <p class="err" id="minutesErr"></p>
+      <p class="okmsg" id="minutesOk"></p>
+
+      <hr/>
+
+      <!-- 9 -->
+      <h2>9. Notifications (the unsubscribe maze)</h2>
+      <p class="hint">Uncheck to unsubscribe. Flipping one flips a random other one. Like every newsletter ever.</p>
+      <p>
+        <label><input type="checkbox" id="t_agree" /> I AGREE to the 47-page terms (must be ON)</label><br/>
+        <label><input type="checkbox" id="t_sms" checked /> Text me promos at 3AM (must be OFF)</label><br/>
+        <label><input type="checkbox" id="t_data" /> Share my data with 500 partner companies (must be OFF)</label><br/>
+        <label><input type="checkbox" id="t_robot" /> I am a robot (must be OFF)</label><br/>
+        <small>times betrayed: <b id="betrayCount">0</b></small>
+      </p>
+      <p class="err" id="togglesErr"></p>
+      <p class="okmsg" id="togglesOk"></p>
+
+      <hr/>
+
+      <!-- 10 -->
+      <h2>10. Terms (all 47 pages)</h2>
+      <p class="hint">Scroll to the very bottom to unlock the checkbox. Skimming counts. We skimmed writing it.</p>
+      <div id="termsBox" tabindex="0">
+        <ol>
+          <li>Quiet hours are 10pm–8am. The walls are thin. Everyone knows about the trumpet.</li>
+          <li>The elevator CLOSE button is decorative. Plan accordingly.</li>
+          <li>Do not microwave fish in the lobby. Incident #12 is why we have this rule.</li>
+          <li>Packages left over 3 days become lobby property. The plant got a toaster that way.</li>
+          <li>Laundry room: remove clothes promptly. Abandoned socks go to the sock wall of shame.</li>
+          <li>Parking spot 7 is not a spot. It is a misunderstanding with lines.</li>
+          <li>The grill on the roof is first-come. The pigeons are always first. Accept it.</li>
+          <li>Trash goes out Tuesday. Recycling is Thursday. Guessing is every day.</li>
+          <li>Do not feed the vending machine dollar bills. It accepts, it never returns.</li>
+          <li>Pool hours 9–9. No cannonballs after 8. The downstairs neighbor counts.</li>
+          <li>Gym: wipe machines. The mystery novel left on the bike is community property now.</li>
+          <li>Hallway lights flicker at 11pm. They have always done that. Do not call.</li>
+          <li>Satellite dishes face south. Ours faces the brick wall. Reception is a rumour.</li>
+          <li>Doormats may not extend past your door. The mat measuring happens in spring.</li>
+          <li>Pets under 25 pounds. The scale in the office adds 2. Everyone knows. Nobody fixes it.</li>
+          <li>Balcony storage: bikes yes, couches no. The couch on 3B is grandfathered in.</li>
+          <li>Lost keys cost $50. Found keys cost one (1) good story.</li>
+          <li>The ice machine is empty until further notice. Further notice was 2019.</li>
+          <li>Meeting room books 1 week ahead. The whiteboard markers are all dry. Bring your own.</li>
+          <li>Wi-Fi is free for 15 minutes. After that, see Form 7-C. You are reading Form 7-C.</li>
+        </ol>
+      </div>
+      <p><label><input type="checkbox" id="agreeChk" disabled /> I read everything above (must be ON)</label></p>
+      <p class="err" id="termsErr"></p>
+      <p class="okmsg" id="termsOk"></p>
+
+      <hr/>
+
+      <!-- 11 -->
+      <h2>11. Prove you're human</h2>
+      <p id="captchaQ"><b>Level 1:</b> Select all TRAFFIC LIGHTS. If there are none, press VERIFY with nothing selected. Yes, really.</p>
+      <div id="captchaGrid"></div>
+      <p>
+        <input id="captchaText" placeholder="type text here (level 3 only)" hidden />
+        <span id="captchaDistort" hidden>Te4_Br34k!</span>
+      </p>
+      <p>
+        <button id="captchaVerify">VERIFY</button>
+        <span id="captchaMsg">attempts: 0. captcha mood: calm</span>
+      </p>
+      <p class="err" id="captchaErr"></p>
+      <p class="okmsg" id="captchaOk"></p>
+
+      <hr/>
+
+      <!-- 12 -->
+      <h2>12. Connect</h2>
+      <p class="hint">The button is nervous, like an elevator CLOSE button. Catch it 5 times, then it lets you click.</p>
+      <div id="arena">
+        <button id="submitBtn">CONNECT (free 15 min)</button>
+      </div>
+      <p>Catch attempts: <b id="catchCount">0 / 5</b> &nbsp; <span id="tiredMsg"></span></p>
+      <p class="err" id="submitErr"></p>
+
+      <table id="complaintTable" border="1" cellpadding="4">
+        <tr><th>complaint no.</th><th>status</th></tr>
+        <tr><td>001 - wifi slow in stairwell</td><td>rejected</td></tr>
+        <tr><td>002 - button ran away</td><td>skill issue</td></tr>
+        <tr><td>003 - code expired</td><td>classic</td></tr>
+      </table>
+
+      <hr/>
+      <div id="footer">
+        <p><small>sounds inspired by <a href="https://kenney.nl/assets/interface-sounds" target="_blank">kenney.nl interface sounds</a> (re-made with webaudio). button idea from <a href="https://uiverse.io/" target="_blank">uiverse.io</a>. icons <a href="https://lucide.dev" target="_blank">lucide</a>. photos <a href="https://picsum.photos" target="_blank">picsum</a> + <a href="https://pravatar.cc" target="_blank">pravatar</a>.</small></p>
+        <p><small>page last updated march 2011. if it doesn't work, unplug the router, count to 10, plug it back. best viewed at 1024x768. made by a person, on the slow computer. no wifi was harmed in the production of this website.</small></p>
+      </div>
+    </div><!-- /page -->
+
+        <div class="status-bar">
+          <p class="status-bar-field" id="statusBoxes">0 boxes done</p>
+          <p class="status-bar-field">printer: out of ink</p>
+          <p class="status-bar-field">room 204</p>
+        </div>
+      </div><!-- /window-body -->
+    </div><!-- /mainWindow -->
+
+    <div id="taskbar">
+      <button id="startBtn"><b>start</b></button>
+      <button id="taskItem">Lobby Wi-Fi Signup</button>
+      <span id="trayClock">--:--</span>
+    </div>
+    <div id="startMenu" hidden>
+      <div id="smMine">Minesweeper</div>
+      <div id="smShut">Shut Down…</div>
+      <div id="smAbout">About this form</div>
+    </div>
+
+    <div id="successWrap" hidden>
+      <div class="window" id="successBox">
+        <div class="title-bar"><div class="title-bar-text">pass printed</div></div>
+        <div class="window-body">
+          <p><b>You're in.</b> That took <span id="finalTime">--</span>. Screenshot this — the email confirmation arrives in 3–5 business days (never).</p>
+          <div id="receipt">
+            <pre id="receiptText">LOBBY WI-FI
+------------------------
+...
+* no refund.
+* printer is out of ink.</pre>
+          </div>
+          <p>
+            <button id="enterBtn"><b>GO ONLINE — start my 15 min</b></button>
+            <button id="printBtn">PRINT (real print)</button>
+            <button id="againBtn">start over</button>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="toastWrap"></div>
+    <canvas id="confetti" hidden></canvas>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
+<!-- html ends here with your free Wi-Fi unlocked , enjoy !!(just joking server crashed pls try again later. error code: 500 :))-->
