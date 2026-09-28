@@ -4,7 +4,7 @@ Ordinary task: **sign up for free lobby wifi (yeh its very easy..)**
 
 *(You just have to complete all task and fill the form to get the free lobby wifi)*
 
-*(This website is build using vanilla and uses lagecy windows style for more fun.)*
+*(This website is build using vanilla and uses legacy windows style for more fun.)*
 
 ## *Screenshots*
 ![alt text](screenshots/image.png)
