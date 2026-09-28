@@ -1,16 +1,16 @@
-# Lobby Wi-Fi - free 15 minute pass (Bad ui)
+# Lobby Free Wi-Fi (Bad ui)
 
 Ordinary task: **sign up for free lobby wifi (yeh its very easy..)**
 
-*(You just have to complete all task the form gives to get the free lobby wifi)*
+*(You just have to complete all task and fill the form to get the free lobby wifi)*
 
-*(The website uses lagecy windows style for more fun.)*
+*(This website is build using vanilla and uses lagecy windows style for more fun.)*
 
 ## *Screenshots*
-![alt text](image.png)
+![alt text](screenshots/image.png)
  **This is the form.(go fill it to get free wifi !! yay)**
 
-![alt text](image-1.png)
+![alt text](screenshots/image-1.png)
  **This is no form.(yeh)**
 
 ## *Stuff used*
@@ -22,7 +22,7 @@ Ordinary task: **sign up for free lobby wifi (yeh its very easy..)**
 
 ## *Want to run locally* :
 
-Clone the repo using git clone command(yeh i know you know how to do).
+Clone the repo using git clone command(yeh i know you know how to do it).
 
 ```
 npm install 
