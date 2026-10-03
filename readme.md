@@ -8,7 +8,7 @@ Ordinary task: **sign up for free lobby wifi (yeh its very easy..)**
 
 ## *Screenshots*
 ![alt text](screenshots/image.png)
- **This is the form.(go fill it to get free wifi !! yay)**
+ **This is the form.(go fill it to get free wifi ! yay)**
 
 ![alt text](screenshots/image-1.png)
  **This is no form.(yeh)**
